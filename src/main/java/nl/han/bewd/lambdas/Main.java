@@ -21,19 +21,13 @@ public class Main {
         mijnReis.simuleerReis(new AutoVervoerStrategy()); // Met auto
         mijnReis.simuleerReis(new OVVervoerStrategy());   // Met OV
 
-        System.out.println("Met <nieuw> vervoer (Stap 2)  ");
-        System.out.println("TODO:");
 
-        System.out.println("Met <nieuw> vervoer, lambda edition! (Stap 5)");
-        System.out.println("TODO:");
-        // Voorbeeld uitwerking 1 (geavanceerd met elvis)
-        mijnReis.simuleerReis((s) -> s ? 20000 : 1000);
-
-        // Voorbeeld uitwerking 2 (vergelijkbaar met OVVervoer)
-        mijnReis.simuleerReis((s) -> {
-                Random randomNumberGenerator = new Random();
-                return randomNumberGenerator.nextInt(2000);
-                }
-        );
+        mijnReis.simuleerReis(new JetVervoerStrategy() {
+            @Override
+            public int berekenReistijd(boolean isReisTijdensSpits) {
+                System.out.println("JetVervoerStrategy");
+                return isReisTijdensSpits ? 20 : 10;
+            }
+        });
     }
 }
